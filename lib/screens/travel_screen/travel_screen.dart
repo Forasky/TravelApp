@@ -1,6 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:travel_application/screens/travel_screen/info_screen.dart';
 import 'package:travel_application/services/fonts.dart';
 
 import 'drawer_widget.dart';
@@ -13,6 +15,7 @@ class TravelScreen extends StatefulWidget {
 }
 
 class _TravelScreenState extends State<TravelScreen> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,52 +32,66 @@ class _TravelScreenState extends State<TravelScreen> {
           ),
           body: Column(
             children: <Widget>[
-              Hero(
-                tag: '01',
-                child: ListTile(
-                  trailing: TextButton(
-                    onPressed: () {},
-                    child: const FaIcon(
-                      FontAwesomeIcons.heart,
+              OpenContainer(
+                transitionDuration: const Duration(seconds: 1),
+                closedBuilder: (context, void Function() action) {
+                  return ListTile(
+                    trailing: TextButton(
+                      onPressed: () {},
+                      child: const FaIcon(
+                        FontAwesomeIcons.heart,
+                      ),
                     ),
-                  ),
-                  leading: const Icon(
-                    FontAwesomeIcons.chessRook,
-                    size: 30,
-                  ),
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Мирский замок',
-                        style: Font.joseStyle18,
-                      ),
-                      Text(
-                        '150 км',
-                        style: Font.joseStyle18,
-                      ),
-                    ],
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '10 C',
-                        style: Font.joseStyleGrey16,
-                      ),
-                      Text(
-                        'Пасмурно',
-                        style: Font.joseStyleGrey16,
-                      ),
-                    ],
-                  ),
-                  contentPadding: const EdgeInsets.fromLTRB(
-                    30,
-                    10,
-                    0,
-                    15,
-                  ),
-                ),
+                    leading: const Icon(
+                      FontAwesomeIcons.chessRook,
+                      size: 30,
+                    ),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Мирский замок',
+                          style: Font.joseStyle18,
+                        ),
+                        Text(
+                          '150 км',
+                          style: Font.joseStyle18,
+                        ),
+                      ],
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '1 C',
+                          style: Font.joseStyleGrey16,
+                        ),
+                        Text(
+                          'Пасмурно',
+                          style: Font.joseStyleGrey16,
+                        ),
+                      ],
+                    ),
+                    contentPadding: const EdgeInsets.fromLTRB(
+                      30,
+                      10,
+                      0,
+                      15,
+                    ),
+                  );
+                },
+                openBuilder: (context, void Function() action) {
+                  return InfoScreen(
+                    title: 'Мирсикй замок',
+                    image: const FaIcon(
+                      FontAwesomeIcons.chessRook,
+                    ),
+                    temperature: 10,
+                    distance: 220,
+                    description:
+                        'Этот замок очень красивый. Он олицетворяет историкокультурное наследие Беларуси и выглядит массивно, широко, раскинуто.',
+                  );
+                },
               ),
             ],
           ),

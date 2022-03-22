@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_application/models/authentication_model.dart';
 import 'package:travel_application/services/translation.dart';
@@ -12,11 +12,11 @@ class AuthenticationBloc extends Cubit<AuthenticationBlocState> {
       String email, String password, String number, String name) async {
     try {
       final firebaseAuth = FirebaseAuth.instance;
-      final dbRef = FirebaseDatabase.instance.ref().child("Users");
-      final result = await firebaseAuth.createUserWithEmailAndPassword(
+      final dbRef = FirebaseFirestore.instance.collection("Users");
+      await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       if (FirebaseAuth.instance.currentUser != null) {
-        dbRef.child(result.user!.uid).set(
+        dbRef.add(
           {"email": email, "number": number, "name": name},
         );
         emit(
@@ -63,18 +63,22 @@ class AuthenticationBloc extends Cubit<AuthenticationBlocState> {
 
   Future signIn(String email, String password) async {
     try {
-      var result = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      if (result.user?.uid != null) {
-        emit(
-          AuthenticationBlocState(
-            isLogin: true,
-            message: '',
-            email: result.user?.email,
-            userName: result.user?.displayName,
-          ),
-        );
-      }
+      FirebaseAuth.instance.authStateChanges().listen(
+        (User? user) {
+          if (user != null) {
+            emit(
+              AuthenticationBlocState(
+                isLogin: true,
+                message: '',
+                email: user.email,
+                userName: user.displayName,
+              ),
+            );
+          }
+        },
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         setFalse(
@@ -90,6 +94,12 @@ class AuthenticationBloc extends Cubit<AuthenticationBlocState> {
 
   Future logOut() async {
     await FirebaseAuth.instance.signOut();
+    emit(
+      AuthenticationBlocState(
+        message: '',
+        isLogin: false,
+      ),
+    );
   }
 
   void setFalse(String message) {

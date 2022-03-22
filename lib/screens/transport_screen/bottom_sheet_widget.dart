@@ -85,23 +85,24 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                                   });
                                 },
                               ),
-                              DropDownButton(
-                                dropDownValue:
-                                    state.regions.first.cities.first.name,
-                                listItem: state.regions
-                                    .where(
-                                      (e) => e.name.contains(fromRegion),
-                                    )
-                                    .map(
-                                      (e) => e.cities
-                                          .map(
-                                            (e) => e.name,
-                                          )
-                                          .toList(),
-                                    )
-                                    .toList(),
-                                onValueChanged: (value) => fromCity = value,
-                              ),
+                              // DropDownButton(
+                              //   dropDownValue:
+                              //       state.regions.first.cities.first.name,
+                              //   listItem: state.regions
+                              //       .where(
+                              //         (e) => e.name.contains(fromRegion),
+                              //       )
+                              //       .map(
+                              //         (e) => e.cities
+                              //             .map(
+                              //               (e) => e.name,
+                              //             )
+                              //             .toList(),
+                              //       )
+                              //       .toList(),
+                              //   onValueChanged: (value) => fromCity = value,
+                              // ),
+                              const TextField(),
                             ],
                           ),
                   ),
@@ -120,6 +121,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                                     state.regions.map((e) => e.name).toList(),
                                 onValueChanged: (value) => toRegion = value,
                               ),
+                              const TextField(),
                             ],
                           ),
                   ),

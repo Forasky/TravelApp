@@ -24,7 +24,7 @@ class StartWidget extends StatefulWidget {
 
 class _StartWidgetState extends State<StartWidget> {
   static const logo = 'assets/images/logo.png';
-  static const title = 'PeCaBel';
+  static const title = 'Турист Беларуси';
   final authBloc = GetIt.I.get<AuthenticationBloc>();
 
   @override
@@ -129,8 +129,8 @@ class _StartWidgetState extends State<StartWidget> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        authBloc.signIn(
+                      onPressed: () async {
+                        await authBloc.signIn(
                           widget.emailController.text,
                           widget.passwordControler.text,
                         );

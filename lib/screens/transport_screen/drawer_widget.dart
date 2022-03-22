@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
+import 'package:travel_application/bloc/authentication_bloc.dart';
 import 'package:travel_application/screens/settings_screen/settings_screen.dart';
 import 'package:travel_application/services/fonts.dart';
 import 'package:travel_application/services/translation.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({
+  DrawerWidget({
     Key? key,
     required this.findOut,
   }) : super(key: key);
   final ValueChanged<String> findOut;
+  final bloc = GetIt.I.get<AuthenticationBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,9 @@ class DrawerWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    bloc.logOut();
+                  },
                   child: Text(
                     LocalizationKeys.viewProfile,
                     style: Font.joseStyleWhite20,

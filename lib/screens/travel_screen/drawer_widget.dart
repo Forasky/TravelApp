@@ -7,6 +7,7 @@ import 'package:travel_application/models/authentication_model.dart';
 import 'package:travel_application/screens/login_screen/login_screen.dart';
 import 'package:travel_application/screens/settings_screen/settings_screen.dart';
 import 'package:travel_application/screens/transport_screen/transport_screen.dart';
+import 'package:travel_application/screens/travel_screen/favorite_screen.dart';
 import 'package:travel_application/screens/weather_screen/main_screen.dart';
 import 'package:travel_application/services/fonts.dart';
 import 'package:travel_application/services/translation.dart';
@@ -102,6 +103,23 @@ class TravelDrawerWidget extends StatelessWidget {
                     ),
                     title: Text(
                       'Погода',
+                      style: Font.joseStyleWhite20,
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoriteScreen(),
+                        ),
+                      );
+                    },
+                    leading: const FaIcon(
+                      FontAwesomeIcons.heart,
+                    ),
+                    title: Text(
+                      'Любимые места',
                       style: Font.joseStyleWhite20,
                     ),
                   ),

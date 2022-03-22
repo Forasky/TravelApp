@@ -155,7 +155,7 @@ class ListItem extends StatelessWidget {
         ),
       ),
       leading: const Icon(
-        FontAwesomeIcons.car,
+        FontAwesomeIcons.userAlt,
         size: 30,
       ),
       title: Row(
