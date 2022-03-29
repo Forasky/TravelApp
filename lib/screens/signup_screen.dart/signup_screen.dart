@@ -152,6 +152,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         'password',
                       );
                       if (value != passwordContorler.text) Exception();
+                      return null;
                     },
                   ),
                 ),

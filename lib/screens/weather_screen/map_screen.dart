@@ -6,7 +6,7 @@ import '../../services/translation.dart';
 
 class MapSample extends StatefulWidget {
   final ValueChanged<LatLng> onLocationTab;
-  MapSample({
+  const MapSample({
     Key? key,
     required this.onLocationTab,
   }) : super();
@@ -15,11 +15,11 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
-  Marker _marker = Marker(
+  Marker _marker = const Marker(
     markerId: MarkerId('Minsk'),
   );
 
-  static final CameraPosition _belarus = CameraPosition(
+  static const CameraPosition _belarus = CameraPosition(
     target: LatLng(53.910981510269075, 27.547882162034508),
     zoom: 6,
   );

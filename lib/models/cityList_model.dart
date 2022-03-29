@@ -1,4 +1,3 @@
-// To parse this JSON data, do
 //
 //     final welcome = welcomeFromJson(jsonString);
 import 'package:json_annotation/json_annotation.dart';

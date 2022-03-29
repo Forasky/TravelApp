@@ -1,7 +1,6 @@
 import "dart:async";
 import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,7 +31,7 @@ class TempBloc extends Cubit<WeatherBlocState> {
         temperature: Temperature.fromJson(
           jsonDecode(result.body),
         ),
-        currentCity: '$city',
+        currentCity: city,
       ),
     );
   }
@@ -77,7 +76,6 @@ class TempBloc extends Cubit<WeatherBlocState> {
     try {
       lat = location.latitude;
       lon = location.longitude;
-    } catch (e) {
     } finally {
       final url =
           '$adress/onecall?lat=$lat&lon=$lon&exclude=minutely&appid=$_api&units=metric';

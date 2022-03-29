@@ -112,7 +112,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   textAlign: TextAlign.center,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 10),
+                                  padding: const EdgeInsets.only(top: 10),
                                   child: Text(
                                     LocalizationKeys.feelLike +
                                         state.temperature.current.feelsLike

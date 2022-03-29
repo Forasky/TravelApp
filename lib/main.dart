@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:travel_application/bloc/travel_screen_bloc.dart';
+import 'package:travel_application/models/travel_screen_model.dart';
 import 'package:travel_application/screens/travel_screen/travel_screen.dart';
 
 import 'bloc/authentication_bloc.dart';
@@ -59,6 +62,11 @@ Future<void> main() async {
         message: '',
         isLogin: false,
       ),
+    ),
+  );
+  GetIt.instance.registerSingleton<TravelScreenBloc>(
+    TravelScreenBloc(
+      TravelScreenBlocState(),
     ),
   );
 
