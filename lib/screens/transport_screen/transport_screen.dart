@@ -9,6 +9,8 @@ import 'package:travel_application/models/main_screen_model.dart';
 import 'package:travel_application/services/fonts.dart';
 import 'package:travel_application/services/translation.dart';
 
+import '../../bloc/color_choose_bloc.dart';
+import '../../services/extension.dart';
 import 'bottom_sheet_widget.dart';
 import 'drawer_widget.dart';
 
@@ -27,6 +29,7 @@ class TransportScreen extends StatefulWidget {
 
 class _TransportScreenState extends State<TransportScreen> {
   final mainBloc = GetIt.instance.get<TransportScreenBloc>();
+  final sharedPrefs = GetIt.I.get<ColorChooseBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class _TransportScreenState extends State<TransportScreen> {
                 widget.titleText,
                 style: Font.joseStyleWhite24,
               ),
-              backgroundColor: Colors.green,
+              backgroundColor: HexColor.fromHex('${sharedPrefs.state.color}'),
             ),
             body: StreamBuilder(
               stream: mainBloc.streamBloc(widget.streamName),
@@ -89,7 +92,7 @@ class _TransportScreenState extends State<TransportScreen> {
               },
             ),
             floatingActionButton: FloatingActionButton.extended(
-              backgroundColor: Colors.green,
+              backgroundColor: HexColor.fromHex('${sharedPrefs.state.color}'),
               onPressed: () {
                 showModalBottomSheet<void>(
                   shape: const RoundedRectangleBorder(
@@ -125,7 +128,7 @@ class _TransportScreenState extends State<TransportScreen> {
 
   void _setFind(String find) {
     setState(() {
-      widget.streamName=find;
+      widget.streamName = find;
     });
   }
 }

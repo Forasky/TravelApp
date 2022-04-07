@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:travel_application/bloc/travel_screen_bloc.dart';
-import 'package:travel_application/models/travel_screen_model.dart';
+import 'package:travel_application/bloc/color_choose_bloc.dart';
+import 'package:travel_application/models/color_choose_model.dart';
 import 'package:travel_application/screens/travel_screen/travel_screen.dart';
 
 import 'bloc/authentication_bloc.dart';
@@ -64,9 +64,12 @@ Future<void> main() async {
       ),
     ),
   );
-  GetIt.instance.registerSingleton<TravelScreenBloc>(
-    TravelScreenBloc(
-      TravelScreenBlocState(),
+  final sharedprefs = await SharedPreferences.getInstance();
+  GetIt.instance.registerSingleton<ColorChooseBloc>(
+    ColorChooseBloc(
+      ColorChooseBlocState(
+        color: sharedprefs.getString('color') ?? '#00ff00',
+      ),
     ),
   );
 

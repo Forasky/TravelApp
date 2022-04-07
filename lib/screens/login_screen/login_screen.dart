@@ -126,6 +126,40 @@ class _StartWidgetState extends State<StartWidget> {
                           value ?? '',
                           'password',
                         ),
+                        onFieldSubmitted: (String value) async {
+                        await authBloc.signIn(
+                          widget.emailController.text,
+                          widget.passwordControler.text,
+                        );
+                        if (state.isLogin) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TransportScreen(
+                                titleText: LocalizationKeys.findPeople,
+                                streamName: LocalizationKeys.people,
+                              ),
+                            ),
+                          );
+                        } else {
+                          AlertDialog(
+                            title: Text(
+                              LocalizationKeys.error,
+                            ),
+                            content: Text(state.message),
+                            actions: [
+                              ElevatedButton(
+                                child: Text(
+                                  LocalizationKeys.submit,
+                                ),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          );
+                        }
+                      },
                       ),
                     ),
                     ElevatedButton(

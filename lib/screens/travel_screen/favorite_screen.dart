@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_it/get_it.dart';
 import 'package:travel_application/screens/travel_screen/travel_screen.dart';
 
+import '../../bloc/color_choose_bloc.dart';
+import '../../services/extension.dart';
 import '../../services/fonts.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -12,6 +15,8 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  final sharedPrefs = GetIt.I.get<ColorChooseBloc>();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +36,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             ),
           ),
           title: const Text('Любимые места'),
-          backgroundColor: Colors.green,
+          backgroundColor: HexColor.fromHex('${sharedPrefs.state.color}'),
         ),
         body: Center(
           child: Text(

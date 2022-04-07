@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
-import 'package:travel_application/models/travel_screen_model.dart';
+import 'package:travel_application/models/color_choose_model.dart';
 import 'package:travel_application/screens/travel_screen/info_screen.dart';
 import 'package:travel_application/services/extension.dart';
 import 'package:travel_application/services/fonts.dart';
 
-import '../../bloc/travel_screen_bloc.dart';
+import '../../bloc/color_choose_bloc.dart';
 import 'drawer_widget.dart';
 
 class TravelScreen extends StatefulWidget {
@@ -20,11 +20,11 @@ class TravelScreen extends StatefulWidget {
 }
 
 class _TravelScreenState extends State<TravelScreen> {
-  final bloc = GetIt.instance.get<TravelScreenBloc>();
+  final bloc = GetIt.instance.get<ColorChooseBloc>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TravelScreenBloc, TravelScreenBlocState>(
+    return BlocBuilder<ColorChooseBloc, ColorChooseBlocState>(
       bloc: bloc,
       builder: (context, state) {
         return MaterialApp(
@@ -36,8 +36,7 @@ class _TravelScreenState extends State<TravelScreen> {
             child: Scaffold(
               drawer: TravelDrawerWidget(),
               appBar: AppBar(
-                backgroundColor: //HexColor.fromHex('${bloc.getColor()}'),
-                    Colors.amber,
+                backgroundColor: HexColor.fromHex('${state.color}'),
                 title: const Text('Рядом с вами'),
               ),
               body: Column(
