@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_application/bloc/color_choose_bloc.dart';
@@ -74,14 +75,16 @@ Future<void> main() async {
   );
 
   runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale('en'),
-        Locale('ru'),
-      ],
-      path: 'assets/translations',
-      fallbackLocale: const Locale('en'),
-      child: const TravelScreen(),
+    ProviderScope(
+      child: EasyLocalization(
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ru'),
+        ],
+        path: 'assets/translations',
+        fallbackLocale: const Locale('en'),
+        child: const TravelScreen(),
+      ),
     ),
   );
 }

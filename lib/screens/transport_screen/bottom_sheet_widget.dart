@@ -17,6 +17,8 @@ class BottomSheetWidget extends StatefulWidget {
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   var _isRadioSelected = false;
+  final from = TextEditingController();
+  final to = TextEditingController();
   final dateController = TextEditingController();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
@@ -24,8 +26,8 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   final bloc = GetIt.instance.get<BottomSheetBloc>();
   String fromRegion = 'Брестская обл.';
   String toRegion = 'Брестская обл.';
-  late String fromCity;
-  late String toCity;
+  String fromCity = '';
+  String toCity = '';
 
   @override
   void dispose() {
@@ -102,7 +104,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                               //       .toList(),
                               //   onValueChanged: (value) => fromCity = value,
                               // ),
-                              const TextField(),
+                              TextField(
+                                controller: from,
+                              ),
                             ],
                           ),
                   ),
@@ -121,7 +125,9 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                                     state.regions.map((e) => e.name).toList(),
                                 onValueChanged: (value) => toRegion = value,
                               ),
-                              const TextField(),
+                              TextField(
+                                controller: to,
+                              ),
                             ],
                           ),
                   ),
@@ -251,10 +257,10 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         _isRadioSelected == true
                             ? LocalizationKeys.people
                             : LocalizationKeys.cars,
-                        fromCity.toString(),
+                        from.text,
                         phoneController.text,
                         paymentController.text,
-                        toCity.toString(),
+                        to.text,
                         DateFormat('d.m.y').parse(dateController.text),
                         nameController.text,
                       );

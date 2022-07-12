@@ -43,7 +43,7 @@ class _TransportScreenState extends State<TransportScreen> {
             ),
             appBar: AppBar(
               title: Text(
-                widget.titleText,
+                'Найти машину',
                 style: Font.joseStyleWhite24,
               ),
               backgroundColor: HexColor.fromHex('${sharedPrefs.state.color}'),
@@ -158,18 +158,18 @@ class ListItem extends StatelessWidget {
         ),
       ),
       leading: const Icon(
-        FontAwesomeIcons.userAlt,
+        FontAwesomeIcons.carAlt,
         size: 30,
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(
-            '$from - $to   ',
+            '$from - $to ',
             style: Font.joseStyle18,
           ),
           Text(
-            DateFormat('d.MM.y')
+            DateFormat('d.MM')
                     .format(
                       DateTime.fromMillisecondsSinceEpoch(when),
                     )

@@ -5,10 +5,10 @@ import 'package:get_it/get_it.dart';
 import 'package:travel_application/bloc/authentication_bloc.dart';
 import 'package:travel_application/bloc/color_choose_bloc.dart';
 import 'package:travel_application/models/authentication_model.dart';
+import 'package:travel_application/screens/guides/guides_screen.dart';
 import 'package:travel_application/screens/login_screen/login_screen.dart';
 import 'package:travel_application/screens/settings_screen/settings_screen.dart';
 import 'package:travel_application/screens/transport_screen/transport_screen.dart';
-import 'package:travel_application/screens/travel_screen/favorite_screen.dart';
 import 'package:travel_application/screens/weather_screen/main_screen.dart';
 import 'package:travel_application/services/fonts.dart';
 import 'package:travel_application/services/translation.dart';
@@ -85,6 +85,32 @@ class TravelDrawerWidget extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+                            builder: (context) => const GuidesScreen(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StartWidget(),
+                          ),
+                        );
+                      }
+                    },
+                    leading: const FaIcon(
+                      FontAwesomeIcons.userAlt,
+                    ),
+                    title: Text(
+                      'Экскурсии',
+                      style: Font.joseStyleWhite20,
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      if (state.isLogin) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                             builder: (context) => TransportScreen(
                               titleText: LocalizationKeys.findPeople,
                               streamName: LocalizationKeys.people,
@@ -123,23 +149,7 @@ class TravelDrawerWidget extends StatelessWidget {
                       style: Font.joseStyleWhite20,
                     ),
                   ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FavoriteScreen(),
-                        ),
-                      );
-                    },
-                    leading: const FaIcon(
-                      FontAwesomeIcons.heart,
-                    ),
-                    title: Text(
-                      'Любимые места',
-                      style: Font.joseStyleWhite20,
-                    ),
-                  ),
+
                   const Spacer(),
                   ListTile(
                     onTap: () {
@@ -155,7 +165,7 @@ class TravelDrawerWidget extends StatelessWidget {
                       FontAwesomeIcons.cogs,
                     ),
                     title: Text(
-                      LocalizationKeys.settings,
+                      'Настройки',
                       style: Font.joseStyleWhite20,
                     ),
                   ),

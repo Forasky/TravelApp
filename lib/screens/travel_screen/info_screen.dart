@@ -33,7 +33,7 @@ class _InfoScreenState extends State<InfoScreen> {
             SliverAppBar(
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset(
-                  'assets/images/clear.jpg',
+                  'assets/images/zamok.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -61,14 +61,14 @@ class _InfoScreenState extends State<InfoScreen> {
                               text: TextSpan(
                                 children: [
                                   const TextSpan(
-                                    text: 'temperature: ',
+                                    text: 'Температура: ',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),
                                   ),
                                   TextSpan(
-                                    text: widget.temperature.toString(),
+                                    text: '${widget.temperature.toString()} С',
                                     style: const TextStyle(
                                       color: Colors.black,
                                     ),
@@ -86,14 +86,14 @@ class _InfoScreenState extends State<InfoScreen> {
                                 text: TextSpan(
                                   children: [
                                     const TextSpan(
-                                      text: 'distance: ',
+                                      text: 'Расстояние: ',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       ),
                                     ),
                                     TextSpan(
-                                      text: widget.distance.toString(),
+                                      text: '${widget.distance.toString()} км',
                                       style: const TextStyle(
                                         color: Colors.black,
                                       ),
